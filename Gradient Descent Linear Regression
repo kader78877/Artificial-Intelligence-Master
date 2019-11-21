@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+""" Parameters : """
+iteration = 100000
+alpha = 0.0005
+niter = 0
+theta = np.array([1,1])
+np.random.seed(1)
+
+""" Random Generation """
+x = np.arange(0,101)
+X = np.array([np.ones(100),np.random.randint(0,100,100)])
+y  = 2*X[1,:] + 50 + np.random.uniform(-15,15,100)
+
+""" Gradient updating """
+while niter<iteration :
+    y_hat = np.dot(theta,X)
+    error = y_hat-y
+    gradient = (1/100)*np.dot(X,error)
+    theta = theta - alpha * gradient
+
+    niter+=1
+print("i vaut ",niter,", theta =",theta)
+
+plt.scatter(X[1,:],y,color='red')
+plt.plot(theta[0] + x*theta[1],color='black')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+ 
